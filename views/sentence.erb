@@ -1,11 +1,11 @@
 <ol>
 <li><%= @sentence.japanese %></li>
-<li><%= @sentence.translation %></li>
+<li><%= @sentence.german %></li>
 </ol>
 
 <form method="post" action="<%= url "/sentence/#{@sentence.id}/edit"%>" accept-charset="utf-8">
 <input name="_method" type="hidden" value="put" />
-<textarea name="edit_sentence" id="edit_sentence" cols="80" rows="6"><%= @sentence.translation %></textarea>
+<textarea name="edit_sentence" id="edit_sentence" cols="80" rows="6"><%= @sentence.german %></textarea>
 <br />
 <input type="submit" value="Editieren" />
 </form>

@@ -10,8 +10,12 @@ require "./config/db.rb"
 enable :sessions
 use Rack::Flash
 
-get"/" do
+get "/" do
+  if logged_in?
+    redirect to "/user/#{current_user.id}"
+  else
   redirect to "/login"
+  end
 end
 
 get "/login" do
@@ -72,7 +76,7 @@ end
 
 put "/sentence/:id/edit" do
   current_s = Sentence.get(params[:id])
-  current_s.translation = (params[:edit_sentence]).to_s.strip
+  current_s.german = (params[:edit_sentence]).to_s.strip
   if current_s.save
     status 201
     redirect to "/text/#{current_s.text.id}"
@@ -83,13 +87,14 @@ put "/sentence/:id/edit" do
 end
 
 post "/text/new" do
-  text_array = Text.fill params[:new_text]
+  text_array = Text.fill params[:new_text].to_s
+  t = Text.create(:title => params[:text_titel])
+  t.user = current_user
   text_array.each do |sentence|
-    s =  Sentence.new(:japanese => sentence) 
-    s.user = current_user
+    s = Sentence.new(:japanese => sentence)
+    s.text = t
     s.save
   end
   redirect to "/user/#{current_user.id}"
 end
-
 

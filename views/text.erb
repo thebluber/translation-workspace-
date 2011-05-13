@@ -1,7 +1,7 @@
 <h2><%= @text.title %></h2>
 <ol>
-  <% @text.sentences do |sentence|%>
-  <li><a href="<%= url "/sentence/#{sentence.id}/edit" %>"><%= sentence.japanese %></a></li>
+  <% @text.sentences.each do |sentence|%>
+  <li><a href="<%= url "/sentence/#{sentence.id}" %>"><%= sentence.japanese %></a></li>
   <li><%= sentence.german %></li>
   <% end %>
 </ol>

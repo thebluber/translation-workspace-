@@ -21,7 +21,6 @@ class Sentence
   property :japanese, Text
   property :german, Text
 
-  belongs_to :text, :required => false
-  belongs_to :user
+  belongs_to :text
 
 end
