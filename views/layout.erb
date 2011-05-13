@@ -13,10 +13,11 @@
 <body>
 <h1>Workspace für japanische Übersetzung</h1>
   <%[:notice, :key].each do |key|%>
-  <% v = flash[key]%>
-  <% if v%>
-    <div class="<%= key %>"><%= v %></div>
-  <% end %>
+    <% v = flash[key]%>
+    <% if v%>
+      <div class="<%= key %>"><%= v %></div>
+    <% end %>
+ <% end %>
 
   <nav>
     <ul>

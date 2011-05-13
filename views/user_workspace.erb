@@ -1,10 +1,19 @@
+<h2 class="workspace">Meine Dokumente</h2>
 <ol>
-  <% @user.texts.each do |text|%>
-  <li><a href="<%= url "/text/#{text.id}"%>"><%= text.title %></a></li>
+  <% if @user.texts.empty? then %>
+  <li class="nil">es sind noch keine Dokumente vorhanden!</li>
+  <% else %>
+    <% @user.texts.each do |text|%>
+    <li><a href="<%= url "/text/#{text.id}"%>"><%= text.title %></a></li>
+    <% end %>
   <% end %>
 </ol>
 
-<form metho="post" action="<%= url "/text/new"%>" accept-charset="utf-8">
+<form method="post" action="<%= url "/text/new"%>" accept-charset="utf-8">
+
+<label>Titel</label><br />
+<input type="text" /><br />
+<label>Text</label><br />
 <textarea name="new_text" id="new_text" cols="80" rows="7"></textarea>
 <br />
 <input type="submit" value="hinzufügen">

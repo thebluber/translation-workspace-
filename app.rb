@@ -10,6 +10,10 @@ require "./config/db.rb"
 enable :sessions
 use Rack::Flash
 
+get"/" do
+  redirect to "/login"
+end
+
 get "/login" do
   erb :login
 end
@@ -18,7 +22,7 @@ post "/login" do
   user = log_in(params)
   if user then
     flash[:notice] = "erfolgreich angemeldet!"
-    redirect to "/"
+    redirect to "/user/#{user}"
   else 
     flash[:error] = "Username oder Passwort falsch!"
     redirect to "/"
@@ -32,8 +36,10 @@ get "/logout" do
   redirect to "/"
 end
 
-
 get "/register" do
+  erb :register
+end
+post "/register" do
   user = User.new
   user.email = params[:email]
   user.password = params[:password]
@@ -41,7 +47,7 @@ get "/register" do
   if user.save then
     flash[:notice] = "erfolgreich registriert!"
     session[:user_id] = user.id
-    redirect to "/"
+    redirect to "/user/#{user.id}"
   else 
     flash[:error] = "sorry, noch mal..."
     redirect to "/register"
@@ -79,16 +85,11 @@ end
 post "/text/new" do
   text_array = Text.fill params[:new_text]
   text_array.each do |sentence|
-  s =  Sentence.new(:japanese => sentence) 
-  s.user = current_user
+    s =  Sentence.new(:japanese => sentence) 
+    s.user = current_user
+    s.save
   end
-  if s.save then
-    status 201
-    redirect to "/user/#{current_user.id}"
-  else
-    status 412
-    redirect to "/login"
-  end
+  redirect to "/user/#{current_user.id}"
 end
 
-end
+

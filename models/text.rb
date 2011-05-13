@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Text
   include DataMapper::Resource
   property :id, Serial
