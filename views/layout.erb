@@ -1,0 +1,36 @@
+<DOCTYPE! html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title>transhelper</title>
+  <link rel="stylesheet" type="text/css" href="<%= url "/css/style.css" %>" />
+  <!-- [if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<h1>Workspace für japanische Übersetzung</h1>
+  <%[:notice, :key].each do |key|%>
+  <% v = flash[key]%>
+  <% if v%>
+    <div class="<%= key %>"><%= v %></div>
+  <% end %>
+
+  <nav>
+    <ul>
+      <% if logged_in? %>
+      <li>頑張れ, <%= current_user.email %>!</li>
+      <li><a href="<%= url "/logout" %>">Logout</a></li>
+      <% else %>
+      <li><a href="<%= url "/login" %>">Login</a></li>
+      <li><a href="<%= url "/register" %>">Registrieren</a></li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <%= yield %>
+</body>
+
+</html>

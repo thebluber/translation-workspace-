@@ -1,0 +1,6 @@
+<h2><%= @text.title %></h2>
+<ol>
+  <% @text.sentences do |sentence|%>
+  <li><a href="<%= url "/sentence/#{sentence.id}/edit" %>"><%= sentence.japanese %></a></li>
+  <li><%= sentence.translation %></li>
+</ol>
