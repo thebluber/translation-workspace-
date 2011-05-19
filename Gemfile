@@ -9,5 +9,5 @@ gem "dm-core"
 gem "dm-migrations"
 gem "dm-sqlite-adapter"
 #gem "dm-pager"
-
+gem "dm-postgres-adapter"
 gem "rack-flash"
