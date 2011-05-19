@@ -8,7 +8,7 @@ class Text
   has n, :sentences
 
   def self.fill str
-  str_array = str.split(/[。]/)
+  str_array = str.split("。")
   str_array.each do |sentence|
     sentence.strip + "。"
   end
