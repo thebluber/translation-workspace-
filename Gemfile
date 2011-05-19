@@ -11,3 +11,7 @@ gem "dm-sqlite-adapter"
 #gem "dm-pager"
 gem "dm-postgres-adapter"
 gem "rack-flash"
+
+group :development do 
+  gem "dm-sqlite-adapter"
+end
