@@ -10,6 +10,7 @@ require "./config/db.rb"
 enable :sessions
 use Rack::Flash
 
+#login & logout
 get "/" do
   if logged_in?
     redirect to "/user/#{current_user.id}"
@@ -40,6 +41,7 @@ get "/logout" do
   redirect to "/"
 end
 
+#registrieren
 get "/register" do
   erb :register
 end
@@ -58,6 +60,7 @@ post "/register" do
   end
 end
 
+#user_workspace
 get "/user/:id" do
   @user = User.first(:id => params[:id])
   unless logged_in?
@@ -67,13 +70,14 @@ get "/user/:id" do
   end
 end
 
+#einzelne texte ansehen & löschen
 get "/text/:id" do 
   @text = Text.get(params[:id])
   erb :text
 
 end
 
-post "/text/:id" do
+delete "/text/:id" do
   unless logged_in?
   redirect to "/login"
   else
@@ -81,6 +85,8 @@ post "/text/:id" do
   redirect to "/user/#{current_user.id}"
   end
 end
+
+#einzelne Sätze editieren
 get "/sentence/:id" do
   @sentence = Sentence.get(params[:id])
   erb :sentence
@@ -98,6 +104,7 @@ put "/sentence/:id/edit" do
   end
 end
 
+#neuw Texte hinzufügen
 post "/text/new" do
   text_array = Text.fill params[:new_text].to_s
   t = Text.create(:title => params[:text_titel])
