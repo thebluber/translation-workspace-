@@ -60,7 +60,11 @@ end
 
 get "/user/:id" do
   @user = User.first(:id => params[:id])
+  unless logged_in?
+    redirect to "/login"
+  else
   erb :user_workspace
+  end
 end
 
 get "/text/:id" do 
@@ -69,9 +73,9 @@ get "/text/:id" do
 
 end
 
-post "user/:uid/text/:id" do
+post "/text/:id" do
   Text.get(params[:id]).destroy
-  redirect to "/user/#{params[:uid]}"
+  redirect to "/user/#{current_user.id}"
 end
 
 get "/sentence/:id" do

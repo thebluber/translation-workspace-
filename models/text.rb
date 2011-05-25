@@ -13,6 +13,7 @@ class Text
     sentence.strip + "。"
   end
   end
+  
 end
 
 class Sentence
