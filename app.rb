@@ -69,6 +69,11 @@ get "/text/:id" do
 
 end
 
+post "user/:uid/text/:id" do
+  Text.get(params[:id]).destroy
+  redirect to "/user/#{params[:uid]}"
+end
+
 get "/sentence/:id" do
   @sentence = Sentence.get(params[:id])
   erb :sentence
