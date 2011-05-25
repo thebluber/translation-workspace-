@@ -74,10 +74,13 @@ get "/text/:id" do
 end
 
 post "/text/:id" do
-  Text.get(params[:id]).destroy
+  unless logged_in?
+  redirect to "/login"
+  else
+  current_user.texts.get(params[:id]).destroy
   redirect to "/user/#{current_user.id}"
+  end
 end
-
 get "/sentence/:id" do
   @sentence = Sentence.get(params[:id])
   erb :sentence

@@ -4,7 +4,7 @@
   <li class="nil">es sind noch keine Dokumente vorhanden!</li>
   <% else %>
     <% @user.texts.each do |text|%>
-    <li><a href="<%= url "/text/#{text.id}"%>"><%= text.title %></a> <form action="<%= url "/text/#{text.id}"%>" method="post">
+    <li><a href="<%= url "/text/#{text.id}"%>"><%= text.title %></a> <form action="/text/<%= text.id %>" method="post">
    <input type="hidden" name="_method" value="delete" />
    <input type="submit" value="Delete" />
 </form>
