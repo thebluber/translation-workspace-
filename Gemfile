@@ -7,11 +7,8 @@ gem "sinatra"
 
 gem "dm-core"
 gem "dm-migrations"
-gem "dm-postgres-adapter"
 #gem "dm-pager"
-
+gem "dm-postgres-adapter"
 gem "rack-flash"
 
-group :development do
-  gem "dm-sqlite-adapter"
-end
+gem "dm-sqlite-adapter"
