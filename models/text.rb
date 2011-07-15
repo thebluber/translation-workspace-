@@ -14,6 +14,11 @@ class Text
   end
   end
   
+  def sentence
+    sentences = self.sentences
+    sentences.map{|sentence| sentence.japanese + "\n" + sentence.german}
+    sentences.join("\n")
+  end  
 end
 
 class Sentence

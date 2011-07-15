@@ -117,3 +117,12 @@ post "/text/new" do
   redirect to "/user/#{current_user.id}"
 end
 
+#download
+post "/user/:id/download" do
+  user = User.first(:id => params[:id])
+  texts = user.texts
+  texts.map{|text| text.title + "\n" + text.sentence}
+  texts = texts.join("\n")
+  attachment "texts.txt"
+  texts  
+end  
